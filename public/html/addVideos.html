@@ -1,0 +1,43 @@
+<section layout="column" style="height: 100%;">
+    <div flex layout="column" style="min-height: 84px;">
+        <md-list class="md-dense" flex style="overflow: auto;">
+            <video-block ng-repeat="video in videosManager.beingAdded" video="video"></video-block>
+            <div style="height: 100px;" layout="row" layout-align="center center" ng-show="videosManager.beingAdded.length <= 0">
+                <div style="text-transform: lowercase; color: lightgrey;" class="md-caption">Add videos using File <fa name="angle-right"></fa> Add <fa name="angle-right"></fa> File</div>
+            </div>
+        </md-list>
+    </div>
+    <md-card layout="column" style="min-height: 400px;" id="addVideoSettings">
+        <md-card-title style="padding: 0; flex: 0; flex-shrink: 0;">
+            <md-toolbar>
+                <div class="md-toolbar-tools" layout="row" layout-align="space-between center" md-theme="dark" style="font-size: 16px;">
+                    <h3>
+                        <span class="md-title">Settings {{focus}}</span>
+                    </h3>
+                    <md-input-container class="md-block hide-label-on-input" style="padding: 0; margin: 0;">
+                        <label>Preset</label>
+                        <md-select ng-model="asPreset" style="text-transform: capitalize;" aria-label="AS Preset">
+                            <md-select-header class="md-select-header">
+                                <input ng-model="presetSearch"
+                                       type="search"
+                                       placeholder="Search..."
+                                       class="md-header-searchbox md-text">
+                            </md-select-header>
+                            <md-option ng-repeat="preset in asPresets | filter: presetSearch" ng-value="preset">{{preset.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </md-toolbar>
+        </md-card-title>
+        <md-card-content style="overflow: auto; padding: 0;" flex class="hide-errors">
+            <encoder-settings options="clonedOptions"></encoder-settings>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-warn" ng-click="clearList()">Clear List</md-button>
+                <md-button class="md-primary" ng-click="addFilesToQueue()">Add to Queue</md-button>
+            </md-card-actions>
+            <!--<div flex="80">
+            </div>
+            <!--<video controls src="file:///D:/Users/Ayrton/Documents/NetBeansProjects/h265ize-gui/public/test.mkv" autoplay width="370" height="220"></video>-->
+        </md-card-content>
+    </md-card>
+</section>

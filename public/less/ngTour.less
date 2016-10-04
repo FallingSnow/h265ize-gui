@@ -1,0 +1,77 @@
+.ng-tour-backdrop, .ng-tour-highlighter, .ng-tour-informational {
+    display: none;
+}
+.ng-tour {
+    @timing: 0.3s;
+    .ng-tour-backdrop, .ng-tour-highlighter, .ng-tour-informational {
+        display: block;
+    }
+    .ng-tour-backdrop {
+        position: fixed;
+        z-index: 100;
+        background: fade(black, 55%);
+        transition: all @timing ease-in-out;
+        &-top {
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+        &-bottom {
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        &-left {
+            left: 0;
+        }
+        &-right {
+            right: 0;
+        }
+    }
+    .ng-tour-highlighter {
+        position: fixed;
+        &:not(.deactiveated) {
+            pointer-events: none;
+        }
+        z-index: 101;
+        box-shadow: 0 0 14px 1px black;
+        transition: all @timing ease-in-out;
+    }
+    .ng-tour-step-num {
+        margin-left: 10px;
+        margin-right: auto;
+    }
+    .ng-tour-informational {
+        max-width: 300px;
+        position: fixed;
+        z-index: 101;
+        background-color: white;
+        box-shadow: 0 0 14px 1px black;
+        margin: 0;
+        visibility: hidden;
+        max-height: 100vh;
+        display: flex;
+        &.ng-tour-allow-wide {
+            max-width: 60vw;
+        }
+        &.visible {
+            visibility: visible;
+        }
+        &.center {
+            transform: translate(-50%, -50%);
+        }
+        md-card-title {
+            padding: 16px 16px 16px;
+            flex-shrink: 0;
+            + md-card-content {
+                padding-top: 16px;
+            }
+        }
+        md-card-content {
+            overflow: auto;
+        }
+        md-card-actions {
+            flex-shrink: 0;
+        }
+    }
+}

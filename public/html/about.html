@@ -1,0 +1,37 @@
+<md-dialog aria-label="About">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>About</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <fa name="close" aria-label="Close dialog"></fa>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div class="md-headline">h265ize-gui</div>
+                <div class="md-subhead">A Graphical User Interface for h265ize</div>
+                <p class="description md-body-1" style="margin: 0;">
+                    Suspendisse consectetur quis nisi nec tempus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris nec ultricies lacus, et condimentum ante.
+                </p>
+                <div class="hint" style="display: block; float: none;">Version: {{::$root.h265izeGui.version}} - 
+                    <span ng-if="$root.h265izeGui.version >= npmVersion.h265izeGui">Up to date</span>
+                    <a ng-click="openLink('https://www.npmjs.com/package/h265ize-gui')" ng-if="$root.h265izeGui.version < npmVersion.h265izeGui">Version {{npmVersion.h265izeGui}} avaliable...</a>
+                    <span ng-if="!npmVersion.h265izeGui">checking for updates...</span>
+                </div>
+                <div class="md-headline" style="margin-top: 20px;">h265ize</div>
+                <div class="md-subhead">A node utility utilizing ffmpeg to encode videos with the hevc codec</div>
+                <p class="description md-body-1" style="margin: 0;">
+                    Suspendisse consectetur quis nisi nec tempus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris nec ultricies lacus, et condimentum ante.
+                </p>
+                <div class="hint" style="display: block; float: none;">Version: {{::$root.h265ize.version}} - 
+                    <span ng-if="$root.h265ize.version >= npmVersion.h265ize">Up to date</span>
+                    <a ng-click="openLink('https://www.npmjs.com/package/h265ize')" ng-if="$root.h265ize.version < npmVersion.h265ize">Version {{npmVersion.h265ize}} avaliable...</a>
+                    <span ng-if="!npmVersion.h265ize">checking for updates...</span>
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

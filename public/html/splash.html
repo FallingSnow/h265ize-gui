@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="../../node_modules/angular-material/angular-material.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/fonts.css">
+        <style>
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                pointer-events: none;
+                box-sizing: border-box;
+            }
+            #wrapper {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-color: #009688;
+                background-blend-mode: screen;
+                padding: 20px 25px;
+                font-family: 'Dosis', sans-serif !important;
+                color: white;
+                box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+            }
+            #wrapper.windows {
+                top: 25px;
+                left: 25px;
+                bottom: 25px;
+                right: 25px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <span class="md-display-1" style="font-size: 29px;">h265ize</span>
+            <span class="md-caption" style="position: absolute; bottom: 0; right: 0; padding: 5px 15px;">Loading...</span>
+        </div>
+        <script>
+            let Path = require('path');
+            let OS = require('os').platform();
+
+            let wrapper = document.getElementById('wrapper');
+            wrapper.style.backgroundImage = "url(file://" + (OS === 'win32' ? '/' : '') + Path.resolve('public/img/kurisu-makise-invert.png').replace(/\\/g, '/') + ")";
+
+            let height = 530, width = 320;
+            if (OS === 'linux') {
+                wrapper.className += ' linux';
+                height = 480;
+                width = 270;
+            } else {
+                wrapper.className += ' windows';
+            }
+
+            nw.Screen.Init();
+            let screen = nw.Screen.screens[0];
+            let splashWindow = nw.Window.get();
+            splashWindow.resizeTo(width, height);
+            splashWindow.moveTo(screen.bounds.width / 2 - width / 2, screen.bounds.height / 2 - height / 2);
+            nw.Window.open('public/index.html', {
+                id: 'h265ize-gui',
+                title: "H265ize",
+                show: false,
+                "icon": "icon.png",
+                frame: false
+            }, function (win) {
+                win.on('loaded', function () {
+                    splashWindow.close(true);
+                });
+            });
+        </script>
+    </body>
+</html>

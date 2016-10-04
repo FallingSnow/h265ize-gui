@@ -1,0 +1,44 @@
+<div layout="row" layout-fill id="presetManagerPage">
+    <md-content style="border-right: 1px solid transparent;" flex>
+        <encoder-settings options="selected.options" preset="selected" edit-mode="true" ng-if="!!selected"></encoder-settings>
+        <div style="height: 100px;" ng-if="!selected" layout="row" layout-align="center center">
+            <div style="text-transform: lowercase; color: lightgrey;" class="md-caption">Please select a preset on the right</div>
+        </div>
+    </md-content>
+    <md-content id="preset-list" md-theme="formDark" style="max-width: 30vw;">
+        <section>
+            <md-subheader class="md-primary">Default Presets</md-subheader>
+            <md-list layout-padding>
+                <md-list-item class="md-2-line" ng-repeat="preset in asPresets | filter:{type: 'default'}" ng-click="$parent.selected = preset" ng-style="preset == selected && {'background-color': activeBackground}">
+                    <div class="md-list-item-text">
+                        <h4 style="text-transform: capitalize;">{{preset.name}}</h4>
+                        <p class="ellipsis">
+                            {{preset.description}}
+                        </p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </section>
+        <section>
+            <md-subheader class="md-primary">Custom Presets</md-subheader>
+            <md-list layout-padding>
+                <md-list-item class="md-2-line" ng-repeat="preset in asPresets | filter:{type: 'custom'}" ng-click="$parent.selected = preset" ng-style="preset == selected && {'background-color': activeBackground}">
+                    <div class="md-list-item-text">
+                        <h4 style="text-transform: capitalize;">{{preset.name}}</h4>
+                        <p class="ellipsis">
+                            {{preset.description}}
+                        </p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </section>
+        <div id="controls" style="float: right;">
+            <md-button class="md-icon-button" ng-click="selected = presetManager.create()">
+                <fa name="plus" aria-label="Add Preset"></fa>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="presetManager.delete(selected)" ng-disabled="selected.type == 'default' || !selected">
+                <fa name="trash" aria-label="Remove Preset"></fa>
+            </md-button>
+        </div>
+    </md-content>
+</div>

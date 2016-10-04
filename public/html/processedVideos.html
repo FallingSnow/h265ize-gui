@@ -1,0 +1,13 @@
+<section layout="column" style="height: 100%; position: relative;">
+    <div flex style="padding-bottom: 87px; overflow: auto;">
+        <div style="height: 100px;" layout="row" layout-align="center center" ng-show="videosManager.finished.length < 1 && videosManager.failed.length < 1">
+            <div style="text-transform: lowercase; color: lightgrey;" class="md-caption">No videos have been processed</div>
+        </div>
+        <md-list class="md-dense">
+            <md-subheader class="md-primary" ng-if="videosManager.finished.length > 0">Finished</md-subheader>
+            <video-block ng-repeat="video in videosManager.finished" video="video"></video-block>
+            <md-subheader class="md-warn" ng-if="videosManager.failed.length > 0">Failed</md-subheader>
+            <video-block ng-repeat="video in videosManager.failed" video="video"></video-block>
+        </md-list>
+    </div>
+</section>

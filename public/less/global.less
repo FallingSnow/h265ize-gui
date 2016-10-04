@@ -1,0 +1,275 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+#running-indicator {
+    md-progress-circular path {
+        stroke: lightblue;
+    }
+}
+
+.md-button {
+    &.md-block {
+        display: block;
+        margin: 0;
+    }
+}
+md-input-container {
+    md-switch {
+        margin: 0;
+    }
+}
+.md-caption {
+    text-transform: lowercase;
+    color: lightgrey;
+}
+.md-button{
+    border-radius: 0;
+    .md-ripple-container {
+        border-radius: 0;
+    }
+}
+.window-border {
+    border: 1px solid lightgrey;
+}
+
+#sidebar {
+    border-right: 1px solid #efefef;
+    width: auto;
+    .md-button {
+        @padding: 15px;
+        padding-top: @padding;
+        padding-bottom: @padding;
+    }
+}
+md-toast {
+    &.toast-error {
+        .md-toast-content {
+            background-color: #c62828;
+        }
+    }
+    &.unclosable {
+        text-align: center;
+        [aria-label='Close'] {
+            display: none;
+        }
+    }
+}
+
+.file-list-item {
+    .file-extension {
+        color: #b7b7b7;
+    }
+    md-progress-linear {
+        pointer-events: none;
+        margin: 0 15px;
+    }
+}
+
+.hide-errors {
+    .md-errors-spacer {
+        display: none;
+    }
+}
+
+input {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.hint {
+    /* Position the hint */
+    position: relative;
+    float: left;
+    margin-top: 2px;
+    /* Copy styles from ng-messages */
+    font-size: 11px;
+    line-height: 14px;
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+    /* Set our own color */
+    color: #b5b5b5;
+    a {
+        color: grey;
+    }
+}
+
+body {
+    overflow: hidden;
+}
+
+.log-message {
+    &.debug {
+        background: #EEEEEE;
+    }
+    &.verbose {
+        background: #EDE7F6;
+    }
+    &.info {
+        background: #FAFAFA;
+    }
+    &.alert {
+        background: #E1F5FE;
+    }
+    &.warn {
+        background: #FFF3E0;
+    }
+    &.error {
+        background: #ffebee;
+    }
+}
+
+md-select-menu {
+    .md-header-searchbox {
+        border: none;
+        outline: none;
+        height: 100%;
+        width: 100%;
+        padding: 0;
+    }
+    .md-select-header {
+        box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+        padding-left: 10.667px;
+        height: 48px;
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: auto;
+    }
+
+}
+
+p.md-warn {
+    color: fade(red, 74%) !important;
+}
+
+.ng-tour-informational {
+    border-radius: 0;
+}
+
+md-tooltip {
+    z-index: 60;
+    &.custom {
+        max-width: 500px;
+        border-radius: 0;
+        .md-content {
+            height: auto;
+            white-space: normal;
+            box-sizing: content-box;
+            font-weight: 300;
+            font-size: 13px;
+            background: none;
+            background-color: rgba(243, 243, 243, 0.8);
+            color: #525252;
+            border: 1px solid #c5c5c5;
+            padding: 5px 10px;
+        }
+        &-small {
+            .md-content {
+                font-size: 11px;
+                line-height: 13px;
+            }
+        }
+        li.divider {
+            width: 100%;
+            margin: 6px 0;
+            border-bottom: 1px solid lightgrey;
+        }
+    }
+}
+md-menu-item {
+    .fa {
+        color: #a0a0a0;
+    }
+}
+
+.hide-label-on-input {
+    &.md-input-has-value {
+        label {
+            display: none;
+        }
+    }
+}
+
+.video-block {
+    .info-icon {
+        color: white;
+        padding: 3px 6px;
+        line-height: 1em;
+        font-size: 10px;
+        background-color: rgba(197, 197, 197, 0.61);
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .hidden {
+        visibility: hidden;
+    }
+    &:hover {
+        .hidden {
+            visibility: visible;
+        }
+    }
+}
+
+#log {
+    padding-bottom: 80px;
+    md-list-item {
+        min-height: 0;
+        &:before {
+            min-height: 0;
+        }
+    }
+    .md-list-item-text {
+        margin: 0;
+    }
+}
+
+fieldset {
+    border: 1px solid #e8e8e8;
+    legend {
+        color: #717171;
+    }
+}
+
+md-card-content {
+    padding: 0;
+}
+md-tab-content {
+    padding: 16px;
+    padding-top: 0;
+}
+
+md-dialog.md-default-theme, md-dialog {
+    border-radius: 0;
+}
+
+md-content md-tabs md-tabs-wrapper {
+    background-color: white;
+}
+
+md-slider-container.resize-fix>:first-child:not(md-slider), md-slider-container.resize-fix>:last-child:not(md-slider) {
+    max-width: none;
+}
+
+md-slider-container.resize-fix {
+    md-slider {
+        min-width: 0;
+    }
+}
+
+md-slider {
+    cursor: -webkit-grab;
+    user-select: none;
+    -webkit-user-select: none;
+    &:active {
+        cursor: -webkit-grabbing;
+    }
+}
+.ellipsis {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+@import "presetManagerPage.less";

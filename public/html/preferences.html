@@ -1,0 +1,46 @@
+<md-dialog aria-label="Preferences" style="min-width: 66%;">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 style="text-align: center; width: 100%;">Preferences</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="max-height:810px;">
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Appearence">
+                    <md-content class="md-padding" layout="column">
+                        <md-input-container>
+                            <md-switch ng-model="showSplash" class="md-block" aria-label="Show Splash">
+                                Show Splash
+                            </md-switch>
+                        <div class="hint">Display a splash screen while h265ize-gui starts up.</div>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Theme</label>
+                            <md-select ng-model="theme" style="text-transform: capitalize;">
+                                <md-option ng-repeat="th in themes" value="{{th}}">{{th}}</md-option>
+                            </md-select>
+                            <div class="hint">The color theme for h265ize-gui.</div>
+                        </md-input-container>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Performance">
+                    <!--<h4 class="md-headline">{{::maxThreads}} x {{::cpus[0].model}}</h4>-->
+                    <md-content class="md-padding" layout="column">
+                        <md-input-container>
+                            <label>Threads</label>
+                            <input type="number" ng-model="threads" max="{{::maxThreads}}" min="0" />
+                            <div class="hint">Set to 0 for auto.</div>
+                        </md-input-container>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <div class="hint" flex>You must restart h265ize for these settings to take effect.</div>
+            <md-button ng-click="answer('done')" class="md-primary" >
+                Close
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

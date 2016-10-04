@@ -1,0 +1,12 @@
+<md-bottom-sheet class="md-grid md-has-heade" layout="column">
+    <div ng-cloak layout="row" layout-padding>
+        <md-input-container style="margin: 10px 10px 0 0; padding: 0; min-width: 120px;">
+            <label>Log Level</label>
+            <md-select ng-model="logLevel">
+                <md-option ng-repeat="(name, level) in logLevels" value="{{level}}" style="text-transform: capitalize;">
+                    {{name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+</md-bottom-sheet>

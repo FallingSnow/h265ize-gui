@@ -1,0 +1,14 @@
+<div style="height: 100px;" layout="row" layout-align="center center" ng-if="!messages.length">
+    <div style="text-transform: lowercase; color: lightgrey;" class="md-caption">empty...</div>
+</div>
+<md-list id="log">
+    <md-list-item class="md-2-line md-long-text log-message" ng-class="m.level" ng-repeat="m in messages | aboveLogLevel:logLevel">
+        <div class="md-list-item-text">
+            <p><strong>{{m.level}}</strong> <span ng-bind-html="m.text"></span></p>
+        </div>
+    </md-list-item>
+</md-list>
+
+<md-button class="md-primary md-fab md-fab-bottom-right" ng-click="showBottomSheet()" aria-label="settings">
+    <fa name="bars"></fa>
+</md-button>
