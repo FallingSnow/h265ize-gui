@@ -37,6 +37,15 @@
   },
   "chromium-args": "--mixed-context",
   "author": "Ayrton Sparling",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FallingSnow/h265ize-gui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FallingSnow/h265ize-gui/issues"
+  },
+  "homepage": "https://github.com/FallingSnow/h265ize-gui#readme",
   "node-remote": [],
   "window": {
     "resizable": false,
