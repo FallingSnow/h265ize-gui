@@ -34,7 +34,8 @@
             <span ng-hide="video.videoStream.height">Scanning...</span>
         </p>
         <p ng-if="video.currentStageNum > -1" style="text-transform: capitalize;">
-            {{video.status|| video.currentStage.action}}
+            <span ng-if="video.status">{{video.status}}<span ng-if="video.finishedAt"> - {{video.finishedAt.format('LLL')}}</span></span>
+            <span ng-if="!video.status">{{video.currentStage.action}}</span>
         </p>
     </div>
 

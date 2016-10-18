@@ -1,0 +1,25 @@
+<md-dialog aria-label="Normalization Levels">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Normalization Levels</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="close()">
+                    <fa name="close" aria-label="Close dialog"></fa>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content layout-padding>
+            <p class="hint" style="float: none; text-align: center;">All levels are cumulative. For example: level 2 includes all normalizations from level 0 and 1 unless they conflict.</p>
+            <md-list flex>
+                <md-list-item class="md-2-line" ng-repeat="(level, data) in levels">
+                    <div class="md-list-item-text" layout="column">
+                        <h3>Level {{ level }}</h3>
+                        <p>{{ data.description }}</p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-dialog-content>
+    </form>
+</md-dialog>

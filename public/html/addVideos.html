@@ -20,7 +20,7 @@
                             <md-select-header class="md-select-header">
                                 <input ng-model="presetSearch"
                                        type="search"
-                                       placeholder="Search..."
+                                       placeholder="Search Presets..."
                                        class="md-header-searchbox md-text">
                             </md-select-header>
                             <md-option ng-repeat="preset in asPresets | filter: presetSearch" ng-value="preset">{{preset.name}}</md-option>
@@ -33,7 +33,7 @@
             <encoder-settings options="clonedOptions"></encoder-settings>
             <md-card-actions layout="row" layout-align="end center">
                 <md-button class="md-warn" ng-click="clearList()">Clear List</md-button>
-                <md-button class="md-primary" ng-click="addFilesToQueue()">Add to Queue</md-button>
+                <md-button class="md-primary" ng-click="addFilesToQueue()">Apply Options &amp; Add to Queue</md-button>
             </md-card-actions>
             <!--<div flex="80">
             </div>

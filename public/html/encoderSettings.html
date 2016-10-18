@@ -57,7 +57,8 @@
                 </md-input-container>
                 <md-slider-container class="md-block resize-fix" flex>
                     <span class="md-body-1">Normalization Level</span>
-                    <md-slider flex md-discrete ng-model="options.normalizationLevel" min="0" step="1" max="5" aria-label="Normalization Level" id="normalization-slider" class="md-primary" ng-model-options="{debounce: debounceInterval}" ng-disabled="(editMode && preset.type == 'default')"></md-slider>
+                    <md-slider flex md-discrete ng-model="options.normalizeLevel" min="0" step="1" max="5" aria-label="Normalization Level" id="normalization-slider" class="md-primary" ng-model-options="{debounce: debounceInterval}" ng-disabled="(editMode && preset.type == 'default')"></md-slider>
+                    <div class="hint"><a ng-click="showNormalizationLevels()">Help</a></div>
                     <md-tooltip class="custom" md-delay="::tooltipDelay">
                         Determines the level of normalization to apply to the encode.
                     </md-tooltip>
@@ -102,7 +103,7 @@
         </md-input-container>
     </md-tab>
     <md-tab label="audio">
-        <md-input-container class="md-block"> 
+        <md-input-container class="md-block">
             <md-switch ng-model="options.heAudio" class="md-primary md-block" ng-disabled="options.outputFormat == 'mp4' || (editMode && preset.type == 'default')" aria-label="HE Audio">
                 HE Audio
             </md-switch>
@@ -157,7 +158,7 @@
                     <div class="hint">Create 6 screenshots of the finished encode.</div>
                 </md-input-container>
             </div>
-                
+
         </div>
     </md-tab>
 </md-tabs>
