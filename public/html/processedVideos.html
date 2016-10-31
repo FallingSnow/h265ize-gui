@@ -4,10 +4,10 @@
             <div style="text-transform: lowercase; color: lightgrey;" class="md-caption">No videos have been processed</div>
         </div>
         <md-list class="md-dense">
-            <md-subheader class="md-primary" ng-if="videosManager.finished.length > 0">Finished</md-subheader>
-            <video-block ng-repeat="video in videosManager.finished" video="video"></video-block>
-            <md-subheader class="md-warn" ng-if="videosManager.failed.length > 0">Failed</md-subheader>
-            <video-block ng-repeat="video in videosManager.failed" video="video"></video-block>
+            <md-subheader class="md-primary" ng-if="videosManager.finished.length">Finished</md-subheader>
+            <video-block ng-repeat="video in videosManager.finished track by video.id" video="video"></video-block>
+            <md-subheader class="md-warn" ng-if="videosManager.failed.length">Failed</md-subheader>
+            <video-block ng-repeat="video in videosManager.failed track by video.id" video="video"></video-block>
         </md-list>
     </div>
 </section>

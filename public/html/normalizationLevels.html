@@ -16,6 +16,7 @@
                 <md-list-item class="md-2-line" ng-repeat="(level, data) in levels">
                     <div class="md-list-item-text" layout="column">
                         <h3>Level {{ level }}</h3>
+                        <md-divider ng-if="!$last"></md-divider>
                         <p>{{ data.description }}</p>
                     </div>
                 </md-list-item>

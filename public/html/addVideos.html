@@ -1,9 +1,15 @@
 <section layout="column" style="height: 100%;">
-    <div flex layout="column" style="min-height: 84px;">
+    <div flex layout="column" style="min-height: 84px;" id="videoList" ng-class="{'dragging md-caption': dragging}">
         <md-list class="md-dense" flex style="overflow: auto;">
-            <video-block ng-repeat="video in videosManager.beingAdded" video="video"></video-block>
+            <video-block ng-repeat="video in videosManager.beingAdded track by video.id" video="video"></video-block>
             <div style="height: 100px;" layout="row" layout-align="center center" ng-show="videosManager.beingAdded.length <= 0">
-                <div style="text-transform: lowercase; color: lightgrey;" class="md-caption">Add videos using File <fa name="angle-right"></fa> Add <fa name="angle-right"></fa> File</div>
+                <div style="text-transform: lowercase; color: lightgrey; text-align: center;" class="md-caption">
+                    Add videos using File <fa name="angle-right"></fa> Add <fa name="angle-right"></fa> File
+                    <br />
+                    Or
+                    <br />
+                    Drag them in
+                </div>
             </div>
         </md-list>
     </div>

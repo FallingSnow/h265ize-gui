@@ -1,0 +1,26 @@
+<md-dialog aria-label="Status">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Status</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <fa name="close" aria-label="Close dialog"></fa>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <table id="statuses">
+                    <tr ng-repeat-start="(group, groupStatuses) in statuses">
+                        <td colspan="2" class="md-headline">{{group}}</td>
+                    </tr>
+                    <tr ng-repeat-end ng-repeat="(name, status) in groupStatuses">
+                        <td ng-class="{'success': status, 'failure': !status}"><fa name="circle"></fa></td>
+                        <td>{{name}}</td>
+                    </tr>
+                </table>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

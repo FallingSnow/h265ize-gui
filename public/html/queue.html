@@ -4,92 +4,16 @@
     }
 </style>
 <section layout="column" style="height: 100%; position: relative;">
-    <div flex style="padding-bottom: 87px; overflow: auto;">
+    <div flex style="padding-bottom: 87px; overflow: auto;" layout="column">
         <div style="height: 100px;" layout="row" layout-align="center center" ng-show="videos.length <= 0 && !currentlyProcessing()">
             <div style="text-transform: lowercase; color: lightgrey;" class="md-caption">Use the Add tab to add videos to the queue</div>
         </div>
-        <md-list class="md-dense">
+        <md-list flex class="md-dense">
             <video-block ng-if="currentlyProcessing()" video="currentlyProcessing()"></video-block>
-            <video-block ng-repeat="video in videos" video="video"></video-block>
-<!--            <section>
-                <md-subheader class="md-accent">In queue</md-subheader>
-                 Currently Processing 
-                <md-list-item class="md-3-line file-list-item" ng-click="null" ng-show="!!currentlyProcessing">
-                    <div class="md-list-item-text" layout="column">
-                        <h3>{{currentlyProcessing.name}}<small class="file-extension">{{currentlyProcessing.ext}}</small></h3>
-                        <h4>{{currentlyProcessing.dir}}</h4>
-                        <p style="text-transform: capitalize;">{{currentlyProcessing.currentStage.action}}</p>
-                    </div>
-                    <md-progress-linear ng-show="currentlyProcessing.running" value="{{currentlyProcessing.progress.percent}}"
-                                        md-mode="{{currentlyProcessing.currentStage.action === 'encoding' ? 'determinate' : 'indeterminate'}}"></md-progress-linear>
-                                        <md-button class="md-secondary md-primary md-icon-button" aria-label="Preview">
-                                            <fa name="film"></fa>
-                                        </md-button>
-                    <md-button class="md-secondary md-warn md-icon-button" ng-click="remove(video)" aria-label="Remove">
-                        <fa name="close"></fa>
-                    </md-button>
-                </md-list-item>
-                 In Queue 
-                <md-list-item class="md-3-line file-list-item" ng-repeat="video in videos" ng-click="null">
-                    <div class="md-list-item-text" layout="column">
-                        <h3>{{video.name}}<small class="file-extension">{{currentlyProcessing.currentStage.ext}}</small></h3>
-                        <h4>{{video.dir}}</h4>
-                        <p style="text-transform: capitalize;">{{video.status}}</p>
-                    </div>
-                    <md-button md-no-ink class="md-secondary md-icon-button" aria-label="info" style="cursor: help;">
-                        <fa name="info"></fa>
-                        <md-tooltip class="custom custom-small" md-delay="1500">
-                            <ul style="list-style: none; padding-left: 0;">
-                                <li ng-repeat="(option, value) in video.options">
-                                    {{option}}: {{value}}
-                                </li>
-                            </ul>
-                        </md-tooltip>
-                    </md-button>
-                    <md-button class="md-secondary md-warn md-icon-button" ng-click="remove(video)" aria-label="Remove">
-                        <fa name="close"></fa>
-                    </md-button>
-                </md-list-item>
-                <section ng-show="finished.length > 0 || failed.length > 0">
-                    <md-subheader>Processed</md-subheader>
-                     Failed 
-                    <md-list-item class="md-3-line file-list-item" ng-repeat="video in failed" ng-click="null">
-                        <div class="md-list-item-text" layout="column">
-                            <h3>{{video.name}}<small class="file-extension">{{video.ext}}</small></h3>
-                            <h4>{{video.dir}}</h4>
-                            <p style="text-transform: capitalize;">failed</p>
-                        </div>
-                        <md-button md-no-ink class="md-secondary md-warn md-icon-button md-hue-2" aria-label="info" style="cursor: help;">
-                            <fa name="exclamation-triangle"></fa>
-                            <md-tooltip class="custom custom-small" md-delay="500">
-                                {{video.error.message}}
-                            </md-tooltip>
-                        </md-button>
-                        <md-button class="md-secondary md-warn md-icon-button" ng-click="remove(video)" aria-label="Remove">
-                            <fa name="close"></fa>
-                        </md-button>
-                    </md-list-item>
-                     Finished 
-                    <md-list-item class="md-3-line file-list-item" ng-repeat="video in finished track by $index" ng-click="null">
-                        <div class="md-list-item-text" layout="column">
-                            <h3>{{video.name}}<small class="file-extension">{{video.ext}}</small></h3>
-                            <h4>{{video.dir}}</h4>
-                            <p style="text-transform: capitalize;">Completed</p>
-                        </div>
-                        <md-button class="md-secondary md-primary md-icon-button" aria-label="Preview" ng-click="openVideo(video.output.path)">
-                            <fa name="film"></fa>
-                        </md-button>
-                        <md-button class="md-secondary md-warn md-icon-button" ng-click="remove(video)" aria-label="Remove">
-                            <fa name="close"></fa>
-                        </md-button>
-                    </md-list-item>
-
-                </section>
-            </section>-->
+            <video-block ng-repeat="video in videos track by video.id" video="video"></video-block>
         </md-list>
     </div>
-    <md-button class="md-fab md-fab-bottom-right" ng-class="$root.Encoder.running ? 'md-warn' : 'md-primary'" aria-label="Run"
-               ng-click="$root.Encoder.running ? platform === 'win32' ? $root.stopEncoder() : $root.pauseEncoder() : $root.startEncoder()">
+    <md-button class="md-fab md-fab-bottom-right" ng-class="$root.Encoder.running ? 'md-warn' : 'md-primary'" aria-label="Run" ng-click="$root.Encoder.running ? platform === 'win32' ? $root.stopEncoder() : $root.pauseEncoder() : $root.startEncoder()">
         <fa name="{{$root.Encoder.running ? platform === 'win32' ? 'stop' : 'pause' : 'play'}}"></fa>
     </md-button>
 </section>

@@ -1,27 +1,29 @@
-<md-list-item class="md-2-line file-list-item video-block" ng-click="null">
+<md-list-item class="md-2-line file-list-item video-block">
     <fa name="{{video.typeIconName}}" class="md-avatar fa-fw" style="display: flex; justify-content: center; align-items: center;" title="{{video.type}}"></fa>
-    <div class="md-list-item-text" layout="column">
 
-        <!-- File Info -->
-        <div class="info-icon hidden">
-            <fa name="info"></fa>
-            <md-tooltip class="custom custom-small" md-delay="1500">
-                <ul style="list-style: none; padding-left: 0;">
-                    <li ng-if="video.metadata.format.bit_rate"><strong style="text-transform: capitalize;">Bitrate:</strong> {{::video.metadata.format.bit_rate| fileSize}}ps</li>
-                    <li ng-repeat="stream in video.metadata.streams">
-                        <strong style="text-transform: capitalize;">{{stream.codec_type}}:</strong>
-                        <span style="text-transform: uppercase;">{{stream.codec_long_name}}</span>
-                        <span ng-show="stream.codec_type == 'video'">[{{stream.height}}{{video.metadata.format.interlaced && 'i'|| 'p'}}]</span>
-                        <span ng-show="stream.codec_type == 'audio' && stream.bit_rate != 'N/A'">[{{stream.bit_rate| fileSize}}ps]</span>
-                    </li>
-                    <li class="divider"></li>
-                    <li ng-repeat="(option, val) in video.options">
-                        <strong style="text-transform: capitalize;">{{option}}:</strong>
-                        <span>{{val}}</span>
-                    </li>
-                </ul>
-            </md-tooltip>
-        </div>
+    <canvas class="input-video"></canvas>
+    <!-- File Info -->
+    <div class="info-icon hidden">
+        <fa name="info"></fa>
+        <md-tooltip class="custom custom-small" md-delay="1500">
+            <ul style="list-style: none; padding-left: 0;">
+                <li ng-if="video.metadata.format.bit_rate"><strong style="text-transform: capitalize;">Bitrate:</strong> {{::video.metadata.format.bit_rate| fileSize}}ps</li>
+                <li ng-repeat="stream in video.metadata.streams">
+                    <strong style="text-transform: capitalize;">{{stream.codec_type}}:</strong>
+                    <span style="text-transform: uppercase;">{{stream.codec_long_name}}</span>
+                    <span ng-show="stream.codec_type == 'video'">[{{stream.height}}{{video.metadata.format.interlaced && 'i'|| 'p'}}]</span>
+                    <span ng-show="stream.codec_type == 'audio' && stream.bit_rate != 'N/A'">[{{stream.bit_rate| fileSize}}ps]</span>
+                </li>
+                <li class="divider"></li>
+                <li ng-repeat="(option, val) in video.options">
+                    <strong style="text-transform: capitalize;">{{option}}:</strong>
+                    <span>{{val}}</span>
+                </li>
+            </ul>
+        </md-tooltip>
+    </div>
+
+    <div class="md-list-item-text" layout="column" style="padding-left: {{previewPadding}}px">
         <h3>{{::video.name}}<small class="file-extension">{{::video.ext}}</small>
         </h3>
         <h4>{{::video.dir}}</h4>
@@ -40,8 +42,7 @@
     </div>
 
     <!-- Progress Bar -->
-    <md-progress-linear ng-show="video.running" value="{{video.progress.percent}}"
-                        md-mode="{{video.currentStage.action === 'encoding' ? 'determinate' : 'indeterminate'}}"></md-progress-linear>
+    <md-progress-linear ng-show="video.running" value="{{video.progress.percent}}" md-mode="{{video.currentStage.action === 'encoding' ? 'determinate' : 'indeterminate'}}"></md-progress-linear>
 
     <!-- Preview Button -->
     <md-button ng-if="video.currentStageNum > 8 && video.status != 'failed'" class="md-secondary md-primary md-icon-button hidden" aria-label="Preview" title="Preview" ng-click="$root.openVideo(video.output.path)">

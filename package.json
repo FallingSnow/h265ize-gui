@@ -10,6 +10,7 @@
     "angular-sanitize": "^1.5.8",
     "angular-ui-router": "^0.3.1",
     "bluebird": "^3.4.1",
+    "bmp-js": "0.0.2",
     "filesize": "^3.3.0",
     "fluent-ffmpeg": "^2.1.0",
     "font-awesome": "^4.6.3",
@@ -20,7 +21,7 @@
     "mime": "^1.3.4",
     "moment": "^2.14.1",
     "npm-latest": "^1.0.2",
-    "nw": "^0.17.6",
+    "nw": "^0.18.0",
     "promise-pauser": "^1.0.0",
     "recursive-readdir": "^2.0.0"
   },

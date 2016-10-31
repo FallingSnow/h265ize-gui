@@ -1,169 +1,204 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>H265ize</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../node_modules/angular-material/angular-material.min.css">
-        <link rel="stylesheet" type="text/css" href="../node_modules/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="css/fonts.css">
-    </head>
-    <body ng-cloak>
-        <div layout="column" style="height: 100%;" ng-class="{'window-border': !$root.maximized}">
-            <md-toolbar layout="row" style="min-height: 0; border: 0 solid #efefef; border-bottom-width: 1px; -webkit-app-region: drag; flex-shrink: 0;">
-                <md-toolbar-filler layout layout-align="center center" style="width: 40px;">
-                    <fa name="rocket"></fa>
-                </md-toolbar-filler>
-                <div flex class="md-caption" layout="row" layout-align="start center" layout-padding style="color: white">H265ize &nbsp; | <span style="text-transform: capitalize;">{{$state.current.name| sanitizeStateName}}</span></div>
-                <div style="-webkit-app-region: no-drag;">
-                    <md-button ng-click="minimize()" aria-label="Minimize" class="md-icon-button"><fa name="minus"></fa></md-button>
-                    <md-button ng-click="maximize()" aria-label="Restore" class="md-icon-button"><fa name="expand"></fa></md-button>
-                    <md-button ng-click="exit()" aria-label="Close" class="md-icon-button"><fa name="close"></fa></md-button>
-                </div>
-            </md-toolbar>
-            <div ng-cloak ng-controller="MenuCtrl as ctrl">
-                <md-toolbar class="md-menu-toolbar" style="min-height: 0;">
-                    <div layout="row">
-                        <div flex layout="row">
-                            <md-menu-bar flex>
-                                <md-menu>
-                                    <button ng-click="$mdOpenMenu()">
+
+<head>
+    <title>H265ize</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../node_modules/angular-material/angular-material.min.css">
+    <link rel="stylesheet" type="text/css" href="../node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+</head>
+
+<body ng-cloak>
+    <div layout="column" style="height: 100%;" ng-class="{'window-border': !$root.maximized}">
+        <md-toolbar layout="row" style="min-height: 0; border: 0 solid #efefef; border-bottom-width: 1px; -webkit-app-region: drag; flex-shrink: 0;">
+            <md-toolbar-filler layout layout-align="center center" style="width: 40px;">
+                <fa name="rocket"></fa>
+            </md-toolbar-filler>
+            <div flex class="md-caption" layout="row" layout-align="start center" layout-padding style="color: white">H265ize &nbsp; | <span style="text-transform: capitalize;">{{$state.current.name| sanitizeStateName}}</span></div>
+            <div style="-webkit-app-region: no-drag;" layout="row" layout-align="end center">
+                <md-button ng-click="minimize()" aria-label="Minimize" class="md-icon-button">
+                    <fa name="minus"></fa>
+                </md-button>
+                <md-button ng-click="maximize()" aria-label="Restore" class="md-icon-button">
+                    <fa name="expand"></fa>
+                </md-button>
+                <md-button ng-click="exit()" aria-label="Close" class="md-icon-button">
+                    <fa name="close"></fa>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <div ng-cloak ng-controller="MenuCtrl as ctrl">
+            <md-toolbar class="md-menu-toolbar" style="min-height: 0;">
+                <div layout="row">
+                    <div flex layout="row">
+                        <md-menu-bar flex>
+                            <md-menu>
+                                <button ng-click="$mdOpenMenu()">
                                         File
                                     </button>
-                                    <md-menu-content>
-                                        <md-menu-item>
-                                            <md-menu>
-                                                <md-button ng-click="$mdOpenMenu()">Add</md-button>
-                                                <md-menu-content>
-                                                    <md-menu-item><md-button ng-click="ctrl.addFile()"><fa name="file"></fa>File</md-button></md-menu-item>
-                                                    <md-menu-item><md-button ng-click="ctrl.addDirectory()"><fa name="folder"></fa>Folder</md-button></md-menu-item>
-                                                </md-menu-content>
-                                            </md-menu>
-                                        </md-menu-item>
-                                        <md-menu-item>
-                                            <md-button ng-click="showPreferences()">
-                                                Preferences
-                                            </md-button>
-                                        </md-menu-item>
-                                        <md-menu-divider></md-menu-divider>
-                                        <md-menu-item>
-                                            <md-button ng-click="ctrl.sampleAction('Exit', $event)">
-                                                Exit
-                                            </md-button>
-                                        </md-menu-item>
-                                    </md-menu-content>
-                                </md-menu>
-                                <md-menu>
-                                    <button ng-click="$mdOpenMenu()">
+                                <md-menu-content>
+                                    <md-menu-item>
+                                        <md-menu>
+                                            <md-button ng-click="$mdOpenMenu()">Add</md-button>
+                                            <md-menu-content>
+                                                <md-menu-item>
+                                                    <md-button ng-click="ctrl.addFile()">
+                                                        <fa name="file"></fa>File</md-button>
+                                                </md-menu-item>
+                                                <md-menu-item>
+                                                    <md-button ng-click="ctrl.addDirectory()">
+                                                        <fa name="folder"></fa>Folder</md-button>
+                                                </md-menu-item>
+                                            </md-menu-content>
+                                        </md-menu>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click="showPreferences()">
+                                            Preferences
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-divider></md-menu-divider>
+                                    <md-menu-item>
+                                        <md-button ng-click="ctrl.sampleAction('Exit', $event)">
+                                            Exit
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                            <md-menu>
+                                <button ng-click="$mdOpenMenu()">
                                         Queue
                                     </button>
-                                    <md-menu-content>
-                                        <md-menu-item class="md-indent" ng-hide="$root.Encoder.running">
-                                            <md-button ng-click="$root.startEncoder()">
-                                                Run
-                                                <span class="md-alt-text">{{ 'M-R' | keyboardShortcut }}</span>
-                                            </md-button>
-                                        </md-menu-item>
-                                        <md-menu-item class="md-indent" ng-show="$root.Encoder.running && platform !== 'win32'">
-                                            <md-button ng-click="$root.pauseEncoder()">
-                                                Paused
-                                                <span class="md-alt-text">{{ 'M-P' | keyboardShortcut }}</span>
-                                            </md-button>
-                                        </md-menu-item>
-                                        <md-menu-item class="md-indent" ng-show="$root.Encoder.running">
-                                            <md-button ng-click="$root.stopEncoder()">
-                                                Stop
-                                                <span class="md-alt-text">{{ 'M-S' | keyboardShortcut }}</span>
-                                            </md-button>
-                                        </md-menu-item>
-                                    </md-menu-content>
-                                </md-menu>
-                                <md-menu>
-                                    <button ng-click="$mdOpenMenu()">
+                                <md-menu-content>
+                                    <md-menu-item class="md-indent" ng-hide="$root.Encoder.running">
+                                        <md-button ng-click="$root.startEncoder()">
+                                            Run
+                                            <span class="md-alt-text">{{ 'M-R' | keyboardShortcut }}</span>
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item class="md-indent" ng-show="$root.Encoder.running && platform !== 'win32'">
+                                        <md-button ng-click="$root.pauseEncoder()">
+                                            Paused
+                                            <span class="md-alt-text">{{ 'M-P' | keyboardShortcut }}</span>
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item class="md-indent" ng-show="$root.Encoder.running">
+                                        <md-button ng-click="$root.stopEncoder()">
+                                            Stop
+                                            <span class="md-alt-text">{{ 'M-S' | keyboardShortcut }}</span>
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                            <md-menu>
+                                <button ng-click="$mdOpenMenu()">
                                         Tools
                                     </button>
-                                    <md-menu-content>
-                                        <md-menu-item>
-                                            <md-button ng-click="$state.go('presetManagerState');">
-                                                Preset Manager
-                                            </md-button>
-                                        </md-menu-item>
-                                    </md-menu-content>
-                                </md-menu>
-                                <md-menu>
-                                    <button ng-click="$mdOpenMenu()">
+                                <md-menu-content>
+                                    <md-menu-item>
+                                        <md-button ng-click="$state.go('presetManagerState');">
+                                            Preset Manager
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                            <md-menu>
+                                <button ng-click="$mdOpenMenu()">
                                         Help
                                     </button>
-                                    <md-menu-content>
-                                        <md-menu-item>
-                                            <md-button ng-click="tour.start()">
-                                                Tour
-                                            </md-button>
-                                        </md-menu-item>
-                                        <md-menu-item>
-                                            <md-button ng-click="ctrl.sampleAction('Exit', $event)">
-                                                Readme
-                                            </md-button>
-                                        </md-menu-item>
-                                        <md-menu-divider></md-menu-divider>
-                                        <md-menu-item>
-                                            <md-button ng-click="ctrl.showAbout()">
-                                                About
-                                            </md-button>
-                                        </md-menu-item>
-                                    </md-menu-content>
-                                </md-menu>
-                            </md-menu-bar>
-                            <div layout="row" layout-sm="column" layout-align="center center" ng-show="$root.Encoder.running" style="margin: 0 25px 0 10px;">
-                                <md-progress-circular md-mode="indeterminate" md-diameter="30"></md-progress-circular>
-                            </div>
+                                <md-menu-content>
+                                    <md-menu-item>
+                                        <md-button ng-click="tour.start()">
+                                            Tour
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click="ctrl.sampleAction('Exit', $event)">
+                                            Readme
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-divider></md-menu-divider>
+                                    <md-menu-item>
+                                        <md-button ng-click="ctrl.showAbout()">
+                                            About
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click="ctrl.showStatus()">
+                                            Status
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                        </md-menu-bar>
+                        <div layout="row" layout-sm="column" layout-align="center center" ng-show="$root.Encoder.running" style="margin: 0 25px 0 10px;">
+                            <md-progress-circular md-mode="indeterminate" md-diameter="30"></md-progress-circular>
                         </div>
                     </div>
-                </md-toolbar>
-            </div>
-            <section layout="row" flex layout-align="center stretch">
-                <md-sidenav
-                    class="md-sidenav-left"
-                    md-component-id="left"
-                    md-is-locked-open="::true"
-                    md-disable-backdrop
-                    id="sidebar">
-                    <md-content>
-                        <md-button class="md-block" ui-sref="addVideosState" ui-sref-active="md-primary" aria-label="Add Files">
-                            <fa name="plus"></fa>
-                        </md-button>
-                        <md-button class="md-block" ui-sref="queueState" ui-sref-active="md-primary" aria-label="Queue">
-                            <fa name="tasks"></fa>
-                        </md-button>
-                        <md-button class="md-block" ui-sref="processedVideosState" ui-sref-active="md-primary" aria-label="Processed Videos">
-                            <fa name="bars"></fa>
-                        </md-button>
-                        <md-button class="md-block" ui-sref="logState" ui-sref-active="md-primary" aria-label="Log">
-                            <fa name="file-text"></fa>
-                        </md-button>
-                    </md-content>
-                </md-sidenav>
-                <md-content class="page-container" ui-view flex style="border-top: 1px solid #efefef; position: initial;"></md-content>
-            </section>
+                </div>
+            </md-toolbar>
         </div>
+        <section layout="row" flex layout-align="center stretch">
+            <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="::true" md-disable-backdrop id="sidebar">
+                <md-content>
+                    <md-button class="md-block" ui-sref="addVideosState" ui-sref-active="md-primary" aria-label="Add Files">
+                        <fa name="plus"></fa>
+                    </md-button>
+                    <md-button class="md-block" ui-sref="queueState" ui-sref-active="md-primary" aria-label="Queue">
+                        <fa name="tasks"></fa>
+                    </md-button>
+                    <md-button class="md-block" ui-sref="processedVideosState" ui-sref-active="md-primary" aria-label="Processed Videos">
+                        <fa name="bars"></fa>
+                    </md-button>
+                    <md-button class="md-block" ui-sref="logState" ui-sref-active="md-primary" aria-label="Log">
+                        <fa name="file-text"></fa>
+                    </md-button>
+                </md-content>
+            </md-sidenav>
+            <md-content class="page-container" ui-view flex style="border-top: 1px solid #efefef; position: initial;"></md-content>
+        </section>
+    </div>
 
-        <div hide id="hiddenShit">
-            <input id="singleFilePathDialog" type="file" />
-            <input id="filePathDialog" type="file" multiple />
-            <input id="fileDirectoryDialog" type="file" nwdirectory />
-        </div>
-        <script src="../node_modules/nw-dev/lib/dev.js" data-ignore="public/less|settings.json"></script>
-        <script src="../node_modules/angular/angular.min.js"></script>
-        <script src="../node_modules/angular-animate/angular-animate.min.js"></script>
-        <script src="../node_modules/angular-aria/angular-aria.min.js"></script>
-        <script src="../node_modules/angular-material/angular-material.min.js"></script>
-        <script src="../node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+    <div hide id="hiddenShit">
+        <input id="singleFilePathDialog" type="file" />
+        <input id="filePathDialog" type="file" multiple />
+        <input id="fileDirectoryDialog" type="file" nwdirectory />
+    </div>
+    <script src="../node_modules/nw-dev/lib/dev.js" data-ignore="public/less|settings.json"></script>
+    <script src="../node_modules/angular/angular.min.js"></script>
+    <script src="../node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="../node_modules/angular-aria/angular-aria.min.js"></script>
+    <script src="../node_modules/angular-material/angular-material.min.js"></script>
+    <script src="../node_modules/angular-sanitize/angular-sanitize.min.js"></script>
 
-        <script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script src="../node_modules/angular-fontawesome/dist/angular-fontawesome.min.js"></script>
+    <script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="../node_modules/angular-fontawesome/dist/angular-fontawesome.min.js"></script>
 
-        <script src="js/keyboardShortcut.js"></script>
-        <script src="ui.js"></script>
-    </body>
+    <script src="js/keyboardShortcut.js"></script>
+
+    <script src="js/filters.js"></script>
+    <script src="js/modules/toast.js"></script>
+    <script src="js/modules/logger.js"></script>
+    <script src="js/modules/videoBlock.js"></script>
+    <script src="js/modules/log.js"></script>
+    <script src="js/modules/videosManager.js"></script>
+    <script src="js/modules/presetManager.js"></script>
+    <script src="js/modules/normalization.js"></script>
+    <script src="js/modules/encoderSettings.js"></script>
+    <script src="js/modules/queue.js"></script>
+    <script src="js/modules/proccessedVideo.js"></script>
+    <script src="js/modules/addVideos.js"></script>
+    <script src="js/modules/about.js"></script>
+    <script src="js/modules/status.js"></script>
+    <script src="js/modules/status.js"></script>
+    <script src="js/modules/menu.js"></script>
+    <script src="js/modules/preferences.js"></script>
+    <script src="js/modules/tour.js"></script>
+
+    <script src="ui.js"></script>
+</body>
+
 </html>
