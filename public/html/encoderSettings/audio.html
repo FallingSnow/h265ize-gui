@@ -1,0 +1,20 @@
+<md-content layout-padding>
+    <md-input-container class="md-block">
+        <md-switch ng-model="options.heAudio" class="md-primary md-block" ng-disabled="options.outputFormat == 'mp4' || (editMode && preset.type == 'default')" aria-label="HE Audio">
+            HE Audio
+        </md-switch>
+        <div class="hint">Encodes lossy audio with the OPUS codec at 40kbps per channel.</div>
+    </md-input-container>
+    <md-input-container class="md-block">
+        <md-switch ng-disabled="!options.heAudio" ng-model="options.forceHeAudio" class="md-primary md-block" aria-label="Force HE Audio" ng-model-options="{debounce: debounceInterval}" ng-disabled="(editMode && preset.type == 'default')">
+            Force HE Audio
+        </md-switch>
+        <div class="hint">Forces encoding of both lossy and lossless audio.</div>
+    </md-input-container>
+    <md-input-container class="md-block">
+        <md-switch ng-disabled="!options.heAudio" ng-model="options.downmixHeAudio" class="md-primary md-block" aria-label="Downmix HE Audio" ng-model-options="{debounce: debounceInterval}" ng-disabled="(editMode && preset.type == 'default')">
+            Downmix HE Audio
+        </md-switch>
+        <div class="hint">Downmixes audio with more than 3 channels to stereo using Dolby Pro Logic II.</div>
+    </md-input-container>
+</md-content>

@@ -19,6 +19,7 @@
     .success {
         color: #4CAF50;
     }
+
     .failure {
         color: #f44336;
     }
@@ -256,6 +257,8 @@ md-menu-item {
         left: 0;
         top: 0;
         height: 100%;
+        transition: all 0.3s ease-in-out;
+            z-index: 1;
     }
 }
 
@@ -285,10 +288,6 @@ fieldset {
 
 md-card-content {
     padding: 0;
-}
-
-md-tab-content {
-    padding: 0 16px 16px;
 }
 
 md-dialog,
@@ -356,7 +355,8 @@ md-slider {
         }
     }
 }
+
 md-list-item {
-    align-items: center;
+    align-items: center !important;
 }
 @import "presetManagerPage.less";

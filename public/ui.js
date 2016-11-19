@@ -132,7 +132,9 @@ Models.Setting.findOne({
     if (err) {
         console.error(err);
     }
-    let settings = {};
+    let settings = {
+        accent: 'blue-grey'
+    };
     if (doc) {
         settings.theme = doc.value;
     } else {
@@ -183,7 +185,7 @@ function loadApp(settings) {
 
             $mdThemingProvider.theme('default')
                 .primaryPalette(settings.theme)
-                //                        .accentPalette('blue-grey');
+                .accentPalette(settings.accent)
             $mdThemingProvider.theme('dark', 'default')
                 .dark();
             $mdThemingProvider.theme('formDark', 'default')
@@ -263,7 +265,7 @@ function loadApp(settings) {
             };
 
 
-            $rootScope.Encoder = new h265ize.Encoder(logger);
+            $rootScope.Encoder = new h265ize.Encoder(logger, {enablePreviewStream: true});
 
             $rootScope.startEncoder = function() {
                 if ($rootScope.Encoder.queue.length <= 0 && !$rootScope.Encoder.currentlyProcessing)

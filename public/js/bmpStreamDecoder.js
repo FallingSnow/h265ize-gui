@@ -3,14 +3,15 @@ const Bmp = require("bmp-js");
 class Image extends EventEmitter {
     constructor(chunk) {
         super();
-        this.buffer = chunk;
-        this.length = chunk.length;
-        this.fileSize = this.buffer.readUInt32LE(2);
+        this.fileSize = chunk.readUInt32LE(2);
+        this.buffer = Buffer.alloc(this.fileSize);
+        chunk.copy(this.buffer);
+        this.pos = chunk.length;
     }
     appendData(chunk) {
-        this.buffer = Buffer.concat([this.buffer, chunk]);
-        this.length += chunk.length;
-        if (this.length === this.fileSize) {
+        chunk.copy(this.buffer, this.pos);
+        this.pos += chunk.length;
+        if (this.pos === this.buffer.length) {
             this.end();
         }
     }
@@ -38,7 +39,8 @@ class StreamDecoder extends EventEmitter {
             this.image = new Image(chunk);
             let _self = this;
             this.image.on('decoded', (data) => {
-                _self.emit('imageDecoded', data);
+                _self.emit('imageDecoded', Object.assign({}, data));
+                _self.image.destroy();
             });
         } else {
             this.image.appendData(chunk);

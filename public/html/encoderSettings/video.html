@@ -1,0 +1,37 @@
+<md-content layout-padding>
+    <div layout="row" layout-align="center center">
+        <md-slider-container class="md-block" flex>
+            <span class="md-body-1">Quality</span>
+            <md-slider flex ng-model="options.quality" ng-disabled="options.videoBitrate || (editMode && preset.type == 'default')" min="0" max="51" aria-label="Quality" id="quality-slider" class="md-primary">
+            </md-slider>
+            <md-input-container>
+                <input flex type="number" ng-model="options.quality" ng-disabled="options.videoBitrate || (editMode && preset.type == 'default')" aria-label="Quality" aria-controls="quality-slider">
+            </md-input-container>
+            <md-tooltip class="custom" md-delay="::tooltipDelay">
+                Quality-controlled variable bitrate. CRF is the default rate control method; it does not try to reach any particular bitrate target, instead it tries to achieve a given uniform quality and the size of the bitstream is determined by the complexity of the
+                source video. The higher the rate factor the higher the quantization and the lower the quality.
+            </md-tooltip>
+        </md-slider-container>
+        <span class="hint" style="padding: 10px 20px;">or</span>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Video Bitrate</label>
+            <input type="number" ng-model="options.videoBitrate" min="0" step="10" ng-model-options="{debounce: debounceInterval}" ng-disabled="(editMode && preset.type == 'default')">
+            <div class="hint">Setting this to anything other than 0 will disable CRF and enable VBR encoding.</div>
+        </md-input-container>
+    </div>
+    <md-input-container>
+        <label>Preset</label>
+        <md-select ng-model="options.preset" style="text-transform: capitalize;" ng-disabled="(editMode && preset.type == 'default')">
+            <md-option ng-repeat="preset in presets" value="{{preset}}">{{preset}}</md-option>
+        </md-select>
+        <div class="hint">Trade Quality for Encoding Speed</div>
+        <md-tooltip class="custom" md-delay="::tooltipDelay">
+            Sets parameters to preselected values, trading off compression efficiency against encoding speed. These parameters are applied before all other input parameters are applied, and so you can override any parameters that these values control.
+        </md-tooltip>
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label>X265 Advanced Options</label>
+        <textarea ng-model="options.extraOptions" rows="2" md-select-on-focus ng-model-options="{debounce: debounceInterval}" ng-disabled="(editMode && preset.type == 'default')"></textarea>
+        <div class="hint">Use <a href="#">ffmpeg format</a>. Example: bframes=6:pmode:psy-rd=3.2</div>
+    </md-input-container>
+</md-content>

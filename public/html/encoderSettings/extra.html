@@ -1,0 +1,40 @@
+
+    <md-content layout-padding>
+        <div layout="row">
+            <div flex="50">
+                <md-input-container class="md-block">
+                    <md-switch ng-model="options.override" class="md-primary md-block" aria-label="Override" ng-disabled="(editMode && preset.type == 'default')">
+                        Override
+                    </md-switch>
+                    <div class="hint">Allows videos that are already encoded in HEVC to be re-encoded.</div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <md-switch ng-model="options.accurateTimestamps" class="md-primary md-block" aria-label="Accurate Timestamps" ng-disabled="(editMode && preset.type == 'default')">
+                        Accurate Timestamps
+                    </md-switch>
+                    <div class="hint">Substantially increases file size but sometimes fixes timestamps.</div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <md-switch ng-model="options.upconvert" class="md-primary md-block" aria-label="Upconvert" ng-disabled="(editMode && preset.type == 'default')">
+                        Upconvert
+                    </md-switch>
+                    <div class="hint">Converts Vobsub subs to srt; Only works when output format is mkv.</div>
+                </md-input-container>
+            </div>
+            <div flex="50">
+                <!--<md-input-container class="md-block">
+                <md-switch ng-model="options.sample" class="md-primary md-block" aria-label="Sample" ng-disabled="(editMode && preset.type == 'default')">
+                    Sample
+                </md-switch>
+                <div class="hint">Create a {{options.previewLength / 1000}} second preview of the finished encode.</div>
+            </md-input-container>-->
+                <md-input-container class="md-block">
+                    <md-switch ng-model="options.screenshots" class="md-primary md-block" aria-label="Screenshots" ng-disabled="(editMode && preset.type == 'default')">
+                        Screenshots
+                    </md-switch>
+                    <div class="hint">Create 6 screenshots of the finished encode.</div>
+                </md-input-container>
+            </div>
+
+        </div>
+    </md-content>

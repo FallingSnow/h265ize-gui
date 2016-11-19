@@ -21,7 +21,20 @@ angular.module('addVideosModule', ['videosManagerModule', 'presetManagerModule',
 
             $scope.clonedOptions = _.clone($scope.asPreset.options);
         });
+
         $scope.asPreset = new Models.Preset();
+        if (localStorage.preset)
+            presetManager.find(localStorage.preset, function(preset) {
+                if (preset)
+                    $scope.$applyAsync(function() {
+                        $scope.asPreset = preset;
+                    });
+            });
+
+        $scope.$watch('asPreset', function(cur) {
+            if (cur)
+                localStorage.preset = cur.name;
+        });
 
         presetManager.events.on('update', updateAsPresets);
 

@@ -34,6 +34,16 @@ angular.module('presetManagerModule', [])
             f.events.emit('delete');
         };
 
+        f.find = function(name, cb) {
+            for (let i = 0; i < f.presets.length; i++) {
+                if (f.presets[i].name === name)
+                    return cb(f.presets[i]);
+                if (i + 1 === f.presets.length) {
+                    return cb(false);
+                }
+            }
+        }
+
         Models.Preset.find({}, function(err, docs) {
             f.presets = f.presets.concat(docs);
             f.events.emit('update');
@@ -41,45 +51,45 @@ angular.module('presetManagerModule', [])
 
         return f;
     })
-.controller('presetManagerCtrl', function($rootScope, $scope, $mdColors, presetManager) {
-    $scope.presetManager = presetManager;
-    $scope.asPresets = presetManager.presets;
-
-    $scope.activeBackground = $mdColors.getThemeColor('default-' + $rootScope.settings.theme + '-500-0.5');
-
-    $scope.update = function() {
+    .controller('presetManagerCtrl', function($rootScope, $scope, $mdColors, presetManager) {
+        $scope.presetManager = presetManager;
         $scope.asPresets = presetManager.presets;
-        $scope.$applyAsync();
-    };
 
-    function deleteHandler() {
-        delete $scope.selected;
-        $scope.update();
-    }
+        $scope.activeBackground = $mdColors.getThemeColor('default-' + $rootScope.settings.theme + '-500-0.5');
 
-    presetManager.events.on('update', $scope.update);
-
-    presetManager.events.on('delete', deleteHandler);
-
-    $scope.$watch('selected', function(cur, old) {
-        if (!cur || cur.type === 'default')
-            return;
-
-        let savedValues = {
-            $$hashKey: cur.$$hashKey,
-            $$mdSelectId: cur.$$mdSelectId
+        $scope.update = function() {
+            $scope.asPresets = presetManager.presets;
+            $scope.$applyAsync();
         };
-        delete cur.$$hashKey;
-        delete cur.$$mdSelectId;
 
-        cur.save(function() {
-            cur.$$hashKey = savedValues.$$hashKey;
-            cur.$$mdSelectId = savedValues.$$mdSelectId;
+        function deleteHandler() {
+            delete $scope.selected;
+            $scope.update();
+        }
+
+        presetManager.events.on('update', $scope.update);
+
+        presetManager.events.on('delete', deleteHandler);
+
+        $scope.$watch('selected', function(cur, old) {
+            if (!cur || cur.type === 'default')
+                return;
+
+            let savedValues = {
+                $$hashKey: cur.$$hashKey,
+                $$mdSelectId: cur.$$mdSelectId
+            };
+            delete cur.$$hashKey;
+            delete cur.$$mdSelectId;
+
+            cur.save(function() {
+                cur.$$hashKey = savedValues.$$hashKey;
+                cur.$$mdSelectId = savedValues.$$mdSelectId;
+            });
+        }, true);
+
+        $scope.$on('$destroy', function() {
+            presetManager.events.removeListener('delete', $scope.update);
+            presetManager.events.removeListener('delete', deleteHandler);
         });
-    }, true);
-
-    $scope.$on('$destroy', function() {
-        presetManager.events.removeListener('delete', $scope.update);
-        presetManager.events.removeListener('delete', deleteHandler);
     });
-});

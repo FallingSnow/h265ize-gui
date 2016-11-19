@@ -24,8 +24,7 @@
     </div>
 
     <div class="md-list-item-text" layout="column" style="padding-left: {{previewPadding}}px">
-        <h3>{{::video.name}}<small class="file-extension">{{::video.ext}}</small>
-        </h3>
+        <h3>{{::video.name}}<small class="file-extension">{{::video.ext}}</small></h3>
         <h4>{{::video.dir}}</h4>
         <p ng-if="video.currentStageNum <= -1">
             <span ng-show="video.videoStream.height">

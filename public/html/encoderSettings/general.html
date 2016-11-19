@@ -1,0 +1,68 @@
+
+    <md-content layout-padding>
+        <div ng-if="editMode" layout="row" layout="center center">
+            <md-input-container flex-gt-sm>
+                <label>Name</label>
+                <input ng-model="preset.name" ng-model-options="{debounce: debounceInterval}" ng-disabled="(editMode && preset.type == 'default')">
+            </md-input-container>
+            <md-input-container flex-gt-sm>
+                <label>Description</label>
+                <input ng-model="preset.description" ng-model-options="{debounce: debounceInterval}" ng-disabled="(editMode && preset.type == 'default')">
+            </md-input-container>
+        </div>
+        <div layout="row" layout="center center">
+            <md-input-container flex>
+                <label>Output Format</label>
+                <md-select ng-model="options.outputFormat" style="text-transform: capitalize;" ng-disabled="(editMode && preset.type == 'default')">
+                    <md-option ng-repeat="format in outputFormats" value="{{format}}">{{format}}</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Native Language</label>
+                <md-select ng-model="options.nativeLanguage" style="text-transform: capitalize;" ng-disabled="(editMode && preset.type == 'default')">
+                    <md-option ng-repeat="lang in nativeLanguages" value="{{lang}}">{{lang}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div layout="row" style="position: relative;">
+            <md-input-container flex>
+                <label>Destination</label>
+                <input ng-model="options.destination" ng-model-options="{debounce: debounceInterval}" ng-disabled="(editMode && preset.type == 'default')">
+                <div class="hint">Directory for all encoded videos, screenshots, and samples</div>
+            </md-input-container>
+            <md-button ng-click="selectDestination()" style="margin: 0 8px;">
+                Browse
+            </md-button>
+        </div>
+        <div layout="row">
+            <section flex="50">
+                <md-input-container class="md-block">
+                    <md-switch ng-model="options.preview" class="md-primary md-block" aria-label="Preview" ng-disabled="(editMode && preset.type == 'default')">
+                        Preview
+                    </md-switch>
+                    <div class="hint">Only encodes the first {{options.previewLength / 1000}} seconds. Starts half way though the input video.</div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <md-switch ng-model="options.delete" class="md-warn md-block" aria-label="Replace Source" ng-disabled="(editMode && preset.type == 'default')">
+                        Replace Source
+                    </md-switch>
+                    <div class="hint">Replaces source with encoded media. USE WITH CAUTION!</div>
+                </md-input-container>
+            </section>
+            <section flex="50">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Preview Length</label>
+                    <input type="number" ng-model="options.previewLength" min="5000" step="10000" ng-model-options="{debounce: debounceInterval}" ng-disabled="!options.preview || (editMode && preset.type == 'default')">
+                    <div class="hint">Time in milliseconds</div>
+                </md-input-container>
+                <md-slider-container class="md-block resize-fix" flex>
+                    <span class="md-body-1">Normalization Level</span>
+                    <md-slider flex md-discrete ng-model="options.normalizeLevel" min="0" step="1" max="5" aria-label="Normalization Level" id="normalization-slider" class="md-primary" ng-model-options="{debounce: debounceInterval}" ng-disabled="(editMode && preset.type == 'default')"></md-slider>
+                    <div class="hint"><a ng-click="showNormalizationLevels()">Help</a></div>
+                    <md-tooltip class="custom" md-delay="::tooltipDelay">
+                        Determines the level of normalization to apply to the encode.
+                    </md-tooltip>
+                </md-slider-container>
+            </section>
+        </div>
+    </md-content>

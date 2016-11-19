@@ -15,18 +15,18 @@
     <div layout="column" style="height: 100%;" ng-class="{'window-border': !$root.maximized}">
         <md-toolbar layout="row" style="min-height: 0; border: 0 solid #efefef; border-bottom-width: 1px; -webkit-app-region: drag; flex-shrink: 0;">
             <md-toolbar-filler layout layout-align="center center" style="width: 40px;">
-                <fa name="rocket"></fa>
+                <img src="/public/img/h265ize-logo-v2-mini-transparent.png" style="width: 24px;" />
             </md-toolbar-filler>
             <div flex class="md-caption" layout="row" layout-align="start center" layout-padding style="color: white">H265ize &nbsp; | <span style="text-transform: capitalize;">{{$state.current.name| sanitizeStateName}}</span></div>
             <div style="-webkit-app-region: no-drag;" layout="row" layout-align="end center">
                 <md-button ng-click="minimize()" aria-label="Minimize" class="md-icon-button">
-                    <fa name="minus"></fa>
+                    <fa name="window-minimize"></fa>
                 </md-button>
                 <md-button ng-click="maximize()" aria-label="Restore" class="md-icon-button">
-                    <fa name="expand"></fa>
+                    <fa name="window-restore"></fa>
                 </md-button>
                 <md-button ng-click="exit()" aria-label="Close" class="md-icon-button">
-                    <fa name="close"></fa>
+                    <fa name="window-close"></fa>
                 </md-button>
             </div>
         </md-toolbar>
