@@ -42,13 +42,13 @@
             <span class="md-caption" style="position: absolute; bottom: 0; right: 0; padding: 5px 15px;">Loading...</span>
         </div>
         <script>
-            let Path = require('path');
-            let OS = require('os').platform();
+            const Path = require('path');
+            const OS = require('os').platform();
 
             let wrapper = document.getElementById('wrapper');
             wrapper.style.backgroundImage = "url(file://" + (OS === 'win32' ? '/' : '') + Path.resolve('public/img/kurisu-makise-invert.png').replace(/\\/g, '/') + ")";
 
-            let height = 530, width = 320;
+            const height = 530, width = 320;
             if (OS === 'linux') {
                 wrapper.className += ' linux';
                 height = 480;

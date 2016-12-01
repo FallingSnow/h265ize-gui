@@ -1,5 +1,6 @@
 angular.module('preferencesModule', [])
     .controller('preferencesCtrl', function($scope, $mdDialog) {
+        $scope.settingsChanged = 0;
         $scope.themes = [
             'red',
             'pink',
@@ -39,6 +40,7 @@ angular.module('preferencesModule', [])
                 result[value.name] = value.value;
                 return result;
             }, {});
+            $scope.initialSettings = settings;
             _.extend($scope, settings);
             $scope.$applyAsync();
         });
@@ -47,6 +49,13 @@ angular.module('preferencesModule', [])
             $scope.$watch(modelName, function(cur) {
                 if (typeof cur === 'undefined')
                     return;
+
+                if ($scope.initialSettings[modelName] === cur) {
+                    if ($scope.settingsChanged > 0)
+                        $scope.settingsChanged--;
+                } else {
+                    $scope.settingsChanged++;
+                }
 
                 Models.Setting.update({
                     name: modelName
