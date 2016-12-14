@@ -1,5 +1,5 @@
-angular.module('addVideosModule', ['videosManagerModule', 'presetManagerModule', 'encoderSettingsModule'])
-    .controller('addVideosCtrl', function($rootScope, $scope, $element, videosManager, presetManager) {
+angular.module('addVideosModule', ['videosManagerModule', 'presetManagerModule', 'encoderSettingsModule', 'loggerModule'])
+    .controller('addVideosCtrl', function($rootScope, $scope, $element, videosManager, presetManager, logger) {
         $scope.numScanning = videosManager.scanning;
         $scope.videosManager = videosManager;
 
@@ -57,6 +57,12 @@ angular.module('addVideosModule', ['videosManagerModule', 'presetManagerModule',
                 });
             }
             for (let vid of $scope.videosManager.beingAdded) {
+                if (vid.videoStream.codec_name === 'hevc' && !vid.options.override) {
+                    numVideos--;
+                    logger.warn(vid.base, 'was not added to processing queue because video is already encoded in hevc and override was not enabled.');
+                    console.warn(vid, 'was not added to processing queue because video is already encoded in hevc and override was not enabled.');
+                    continue;
+                }
                 let options = {};
                 _.defaults(options, $scope.clonedOptions, vid.options);
                 vid.options = options;
